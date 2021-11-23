@@ -4,7 +4,7 @@ import Head from "next/head";
 import { ChangeEvent, Fragment, useCallback, useState } from "react";
 import { User } from "@supabase/gotrue-js";
 
-import { createUser } from "../api/user/create";
+import { createUser } from "../hooks/create";
 
 import { useRouter } from "next/router";
 
