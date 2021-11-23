@@ -3,13 +3,14 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { ChangeEvent, Fragment, useCallback, useState } from "react";
 import { User } from "@supabase/gotrue-js";
-
 import { createUser } from "../hooks/create";
-
 import { useRouter } from "next/router";
+
+import { useDispatch } from "react-redux";
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState<string>("");
   const [pw, setPw] = useState<string>("");
   const onChangeEmail = useCallback(
@@ -24,8 +25,9 @@ const Home: NextPage = () => {
   const onClick = useCallback(async () => {
     const res: User | null | undefined = await createUser(email, pw);
     if (!res) return;
-    router.push("/home");
-  }, [email, pw, router]);
+    dispatch({ type: "create", payload: res });
+    router.push("/state");
+  }, [dispatch, email, pw, router]);
 
   return (
     <Fragment>
