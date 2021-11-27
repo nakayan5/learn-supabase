@@ -1,4 +1,4 @@
-import { supabase } from "../../api/supabase";
+import { supabase } from "../../../api/supabase";
 
 export const deleteUser = async () => {
   const res = await supabase.auth.api.deleteUser(

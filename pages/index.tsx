@@ -1,12 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
 import type { NextPage } from "next";
 import Head from "next/head";
 import { ChangeEvent, Fragment, useCallback, useState } from "react";
 import { User } from "@supabase/gotrue-js";
-import { createUser } from "../hooks/create";
+import { createUser } from "../hooks/email/create";
 import { useRouter } from "next/router";
 
 import { useDispatch } from "react-redux";
+
+import { signIn } from "../hooks/auth/signin";
+import { signOut } from "../hooks/auth/signout";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -28,6 +30,11 @@ const Home: NextPage = () => {
     dispatch({ type: "create", payload: res });
     router.push("/state");
   }, [dispatch, email, pw, router]);
+
+  const onSingIn = useCallback(async () => {
+    const { user, session } = await signIn();
+    console.log(user, session);
+  }, []);
 
   return (
     <Fragment>
@@ -64,6 +71,13 @@ const Home: NextPage = () => {
             />
             <button className="btn btn-primary mt-10" onClick={onClick}>
               送信
+            </button>
+
+            <button className="btn btn-primary mt-10" onClick={onSingIn}>
+              signin
+            </button>
+            <button className="btn btn-primary mt-10" onClick={signOut}>
+              signout
             </button>
           </div>
         </div>
