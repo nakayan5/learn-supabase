@@ -1,23 +1,23 @@
 import { User } from "@supabase/gotrue-js";
 
-export interface TUserState {
-  user: User | null;
+export interface TSampleState {
+  name: string;
 }
 
 const initialState = {
-  user: null,
+  name: "tomoya",
 };
 
-export type TUserActionType = "create";
+export type TSampleActionType = "create";
 
-export type TUserAction = {
-  type: TUserActionType;
+export type TSampleAction = {
+  type: TSampleActionType;
   payload: User;
 };
 
-export const userReducer = (
-  state: TUserState = initialState,
-  action: TUserAction
+export const sampleReducer = (
+  state: TSampleState = initialState,
+  action: TSampleAction
 ) => {
   switch (action.type) {
     case "create":
