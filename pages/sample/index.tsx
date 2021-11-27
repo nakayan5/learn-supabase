@@ -1,10 +1,19 @@
-import React, { FC, ReactElement } from "react";
+import React, { FC, ReactElement, useCallback, useMemo } from "react";
 import { store } from "../../store";
+import { useDispatch } from "react-redux";
+import { createSampleAction } from "../../actions/sample";
 
 // ==========================================
 // View
 // ==========================================
 const Sample: FC = (): ReactElement => {
+  const dispatch = useDispatch();
+  const onClick = useCallback(() => {
+    dispatch(createSampleAction("create", "nakamura"));
+  }, [dispatch]);
+
+  const name = useMemo(() => store.getState().sample.name, []);
+
   return (
     <div
       style={{
@@ -14,7 +23,10 @@ const Sample: FC = (): ReactElement => {
         textAlign: "center",
       }}
     >
-      user: {store.getState().sample.name}
+      <p>user: {name}</p>
+      <p onClick={onClick} style={{ color: "wheat", cursor: "pointer" }}>
+        上書き
+      </p>
     </div>
   );
 };

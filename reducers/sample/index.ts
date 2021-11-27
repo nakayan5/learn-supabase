@@ -12,7 +12,7 @@ export type TSampleActionType = "create";
 
 export type TSampleAction = {
   type: TSampleActionType;
-  payload: User;
+  payload: string;
 };
 
 export const sampleReducer = (
@@ -23,7 +23,7 @@ export const sampleReducer = (
     case "create":
       return {
         ...state,
-        ...action.payload,
+        name: action.payload,
       };
 
     default:
