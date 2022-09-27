@@ -13,6 +13,7 @@ import { createUser } from "../../hooks/email/create";
 // ==========================================
 // View
 // ==========================================
+
 const Email: FC = (): ReactElement => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState<string>("");
